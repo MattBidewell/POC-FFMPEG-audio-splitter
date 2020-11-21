@@ -24,7 +24,7 @@ function App() {
 
     const [ready, setReady] = useState(false);
     const [upload, setUpload] = useState();
-    const [gif, setGif] = useState();
+    const [audio, setAudio] = useState();
 
     const load = async () => {
         await ffmpeg.load();
@@ -34,19 +34,6 @@ function App() {
     useEffect(() => {
         load();
     }, [])
-
-    // const convertToGif = async () => {
-    //     try {
-    //         ffmpeg.FS("writeFile", "test.mp4", await fetchFile(upload));
-    //         await ffmpeg.run("-i", "test.mp4", "-t", "2.5", "-ss", "2.0", "-f", "gif", "out.gif");
-    //         const data = ffmpeg.FS('readFile', 'out.gif');
-    
-    //         const url = URL.createObjectURL(new Blob([data.buffer], { type: "image/gif" }));
-    //         setGif(url);
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    // }
 
     const seperateAudio = async () => {
         try {
@@ -62,7 +49,7 @@ function App() {
             console.log(silenceLogs)
 
             // needs to be a sync
-            for (let     [index,silenceLog] of silenceLogs.entries()) {
+            for (let[index,silenceLog] of silenceLogs.entries()) {
                 // if its an end log then use it to process the trim
                 console.log(index, silenceLog)
                 if (silenceLog.includes("end") && index !== silenceLogs.length - 1) {
@@ -88,6 +75,7 @@ function App() {
                     files.push(url);
                     index++;
                 }
+                setAudio(files);
             }
             index = 0;
             console.log(files);
@@ -104,7 +92,9 @@ function App() {
             <h3>Result</h3>
             <button onClick={seperateAudio}>Seperate Audio</button>
 
-            {gif && <img src={gif} width="250"></img>}
+            {audio && audio.map((value) => {
+                <img src={value} width="250" />
+            })}
         </div>
     ) : (<p>Loading...</p>);
 }
@@ -132,3 +122,6 @@ function extractSilenceEnd(log) {
 }
 
 export default App;
+
+/*
+ */
