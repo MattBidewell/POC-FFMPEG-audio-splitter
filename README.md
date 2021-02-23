@@ -1,25 +1,11 @@
-# New Project
+# POC FFMPEG audio splitter
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
+This is a personal proof of concept. 
 
-## Available Scripts
+Using FFMPEG WASM module split a piece of audio on the silence.
 
-### npm start
+Example usecase: A voice over artist is recording something in one long recording, they pause for 3 seconds between each line. If the whole recording was "uploaded" the this webapp then the process and split the entire audio file. 
 
-Runs the app in the development mode.
-Open http://localhost:8080 to view it in the browser.
+## why?
 
-The page will reload if you make edits.
-You will also see any lint errors in the console.
-
-### npm run build
-
-Builds a static copy of your site to the `build/` folder.
-Your app is ready to be deployed!
-
-**For the best production performance:** Add a build bundler plugin like "@snowpack/plugin-webpack" to your `snowpack.config.js` config file.
-
-### npm test
-
-Launches the application test runner.
-Run with the `--watch` flag (`npm test -- --watch`) to run in interactive watch mode.
+Introduction to WASM, also has a potential realistic use case. This is the POC built using React, full version is being built using Vue.
